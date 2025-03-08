@@ -1,6 +1,7 @@
 ﻿import { Button } from '@/components/ui/button';
 import { useTimerContext } from '@/components/timer/TimerContext';
 import { Square } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 export default function StopButton() {
   const { clearTimerInterval, setTimeLeft } = useTimerContext();
@@ -11,8 +12,17 @@ export default function StopButton() {
   };
 
   return (
-    <Button onClick={stopTimer}>
-      <Square />
-    </Button>
+    <TooltipProvider>
+      <Tooltip delayDuration={400}>
+        <TooltipTrigger asChild>
+          <Button onClick={stopTimer}>
+            <Square />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Stop</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 }

@@ -1,18 +1,17 @@
 ﻿import { useTimerContext } from '@/components/timer/TimerContext';
+import { Progress } from '@/components/ui/progress';
+import { getMinutesFromMilliSeconds, getSecondsFromMilliSeconds } from '@/utils/timer/fromMilliSecondConverter';
+import { getTimeLeftPercentage } from '@/utils/timer/timeToPercentageConverter';
 
 export default function TimerDisplay() {
   const { timeLeft } = useTimerContext();
 
-  const displayTimer = () => {
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
-
-    return (
+  return (
+    <section>
       <p>
-        {minutes} : {seconds}
+        {getMinutesFromMilliSeconds(timeLeft)} : {getSecondsFromMilliSeconds(timeLeft)}
       </p>
-    );
-  };
-
-  return <section>{displayTimer()}</section>;
+      <Progress value={getTimeLeftPercentage(timeLeft, 25 * 60)} />
+    </section>
+  );
 }
