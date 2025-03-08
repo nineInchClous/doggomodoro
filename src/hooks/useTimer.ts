@@ -5,15 +5,20 @@ const defaultTimer = 25 * 60;
 
 export const useTimer = (initialTime: number = defaultTimer): TimerHook => {
   const [timeLeft, setTimeLeft] = useState(initialTime);
+  const [isTimerActive, setIsTimerActive] = useState(false);
   const timerIntervalId = useRef<NodeJS.Timeout | null>(null);
 
   const startTimerInterval = () => {
+    setIsTimerActive(true);
+
     timerIntervalId.current = setInterval(() => {
       setTimeLeft((previousTimeLeft) => previousTimeLeft - 1);
     }, 1000);
   };
 
   const clearTimerInterval = () => {
+    setIsTimerActive(false);
+
     if (timerIntervalId.current) clearInterval(timerIntervalId.current);
   };
 
@@ -32,5 +37,6 @@ export const useTimer = (initialTime: number = defaultTimer): TimerHook => {
     setTimeLeft,
     startTimerInterval,
     clearTimerInterval,
+    isTimerActive,
   };
 };

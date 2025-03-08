@@ -2,20 +2,13 @@
 import { useTimerContext } from '@/components/timer/TimerContext';
 
 export default function PlayPauseButton() {
-  const { startTimerInterval, clearTimerInterval } = useTimerContext();
+  const { startTimerInterval, clearTimerInterval, isTimerActive } = useTimerContext();
 
-  const startTimer = () => {
-    startTimerInterval();
-  };
-
-  const pauseTimer = () => {
-    clearTimerInterval();
-  };
+  if (isTimerActive) return <Button onClick={clearTimerInterval}>Pause</Button>;
 
   return (
-    <>
-      <Button onClick={startTimer}>Start</Button>
-      <Button onClick={pauseTimer}>Pause</Button>
-    </>
+    <Button onClick={startTimerInterval} className={'mx-1'}>
+      Start
+    </Button>
   );
 }

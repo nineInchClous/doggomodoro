@@ -3,4 +3,5 @@
   setTimeLeft: React.Dispatch<React.SetStateAction<number>>;
   startTimerInterval: () => void;
   clearTimerInterval: () => void;
+  isTimerActive: boolean;
 }
