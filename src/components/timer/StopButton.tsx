@@ -1,5 +1,6 @@
 ﻿import { Button } from '@/components/ui/button';
 import { useTimerContext } from '@/components/timer/TimerContext';
+import { Square } from 'lucide-react';
 
 export default function StopButton() {
   const { clearTimerInterval, setTimeLeft } = useTimerContext();
@@ -9,5 +10,9 @@ export default function StopButton() {
     setTimeLeft(25 * 60);
   };
 
-  return <Button onClick={stopTimer}>Stop</Button>;
+  return (
+    <Button onClick={stopTimer}>
+      <Square />
+    </Button>
+  );
 }
