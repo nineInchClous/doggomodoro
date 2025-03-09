@@ -1,4 +1,6 @@
-﻿export interface TimerHook {
+﻿import React from 'react';
+
+export interface TimerHook {
   timeLeft: number;
   setTimeLeft: React.Dispatch<React.SetStateAction<number>>;
   startTimerInterval: () => void;
