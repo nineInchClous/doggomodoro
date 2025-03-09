@@ -1,14 +1,17 @@
 ﻿import { Button } from '@/components/ui/button';
-import { useTimerContext } from '@/components/timer/TimerContext';
 import { Square } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Dispatch, memo, SetStateAction } from 'react';
 
-export default function StopButton() {
-  const { clearTimerInterval, setTimeLeft } = useTimerContext();
+interface StopButtonProps {
+  clearTimerInterval: () => void;
+  setTimeLeft: Dispatch<SetStateAction<number>>;
+}
 
+const StopButton = memo(function StopButton({ ...props }: StopButtonProps) {
   const stopTimer = () => {
-    clearTimerInterval();
-    setTimeLeft(25 * 60);
+    props.clearTimerInterval();
+    props.setTimeLeft(25 * 60);
   };
 
   return (
@@ -25,4 +28,6 @@ export default function StopButton() {
       </Tooltip>
     </TooltipProvider>
   );
-}
+});
+
+export default StopButton;

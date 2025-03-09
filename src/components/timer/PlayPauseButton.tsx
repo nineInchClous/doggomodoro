@@ -1,27 +1,33 @@
 ﻿import { Button } from '@/components/ui/button';
-import { useTimerContext } from '@/components/timer/TimerContext';
 import { Pause, Play } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { memo } from 'react';
 
-export default function PlayPauseButton() {
-  const { startTimerInterval, clearTimerInterval, isTimerActive } = useTimerContext();
+interface PlayPauseButtonProps {
+  startTimerInterval: () => void;
+  clearTimerInterval: () => void;
+  isTimerActive: boolean;
+}
 
+const PlayPauseButton = memo(function PlayPauseButton({ ...props }: PlayPauseButtonProps) {
   return (
     <TooltipProvider>
       <Tooltip delayDuration={400}>
         <TooltipTrigger asChild>
-          {isTimerActive ? (
-            <Button onClick={clearTimerInterval}>
+          {props.isTimerActive ? (
+            <Button onClick={props.clearTimerInterval}>
               <Pause strokeWidth={1.75} />
             </Button>
           ) : (
-            <Button onClick={startTimerInterval}>
+            <Button onClick={props.startTimerInterval}>
               <Play />
             </Button>
           )}
         </TooltipTrigger>
-        <TooltipContent>{isTimerActive ? <p>Pause</p> : <p>Play</p>}</TooltipContent>
+        <TooltipContent>{props.isTimerActive ? <p>Pause</p> : <p>Play</p>}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );
-}
+});
+
+export default PlayPauseButton;
