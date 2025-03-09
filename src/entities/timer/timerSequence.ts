@@ -14,11 +14,24 @@ export default class TimerSequence {
     this._timerSteps = [workStep, pauseStep];
   }
 
-  get workStep() {
+  get workStep(): TimerStep {
     return this._timerSteps[0];
   }
 
-  get pauseStep() {
+  get pauseStep(): TimerStep {
     return this._timerSteps[1];
+  }
+
+  get currentStep(): TimerStep {
+    if (!this.isWorkStepOver()) return this.workStep;
+    return this.pauseStep;
+  }
+
+  isWorkStepOver(): boolean {
+    return this._timerSteps[0].isTimeOver();
+  }
+
+  isPauseStepOver(): boolean {
+    return this._timerSteps[1].isTimeOver();
   }
 }

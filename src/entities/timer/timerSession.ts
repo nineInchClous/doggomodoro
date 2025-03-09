@@ -28,16 +28,30 @@ export default class TimerSession {
     this._currentSequenceIndex = 0;
   }
 
-  get currentSequence() {
+  get sequenceCount(): number {
+    return this._sequenceCount;
+  }
+
+  get currentSequenceIndex(): number {
+    return this._currentSequenceIndex;
+  }
+
+  get currentSequence(): TimerSequence {
     return this._sequences[this._currentSequenceIndex];
   }
 
-  isLastSequence() {
-    return this._currentSequenceIndex === this._sequenceCount - 1;
+  isSessionOver(): boolean {
+    return (
+      this._currentSequenceIndex === this._sequenceCount - 1 &&
+      this._sequences[this._currentSequenceIndex].isPauseStepOver()
+    );
   }
 
-  goToNextSequence() {
-    if (this.isLastSequence()) return;
-    this._currentSequenceIndex++;
+  nextStep(): void {
+    if (this.isSessionOver()) return;
+
+    if (this.currentSequence.isPauseStepOver()) {
+      this._currentSequenceIndex++;
+    }
   }
 }

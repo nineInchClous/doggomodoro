@@ -9,23 +9,24 @@
     this._timeLeft = stepDuration;
   }
 
-  get isWorkStep() {
+  get isWorkStep(): boolean {
     return this._isWorkStep;
   }
 
-  get stepDuration() {
+  get stepDuration(): number {
     return this._stepDuration;
   }
 
-  get timeLeft() {
+  get timeLeft(): number {
     return this._timeLeft;
   }
-  set timeLeft(value: number) {
-    if (value < 0) {
-      this._timeLeft = 0;
-      return;
-    }
 
-    this._timeLeft = value;
+  isTimeOver(): boolean {
+    return this._timeLeft <= 0;
+  }
+
+  tick(): void {
+    if (this.isTimeOver()) return;
+    this._timeLeft--;
   }
 }
