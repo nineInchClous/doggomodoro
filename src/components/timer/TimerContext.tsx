@@ -1,13 +1,13 @@
 ﻿'use client';
 
 import React, { createContext, useContext } from 'react';
-import { TimerHook } from '@/types/interfaces/timerHook';
+import { TimerActions } from '@/types/interfaces/timerActions';
 import { useTimer } from '@/hooks/useTimer';
 
-const TimerContext = createContext<TimerHook | undefined>(undefined);
+const TimerContext = createContext<TimerActions | undefined>(undefined);
 
 export const TimerProvider = ({ children }: { children: React.ReactNode }) => {
-  const timer = useTimer(25 * 60);
+  const timer: TimerActions = useTimer();
 
   return <TimerContext value={timer}>{children}</TimerContext>;
 };
