@@ -15,16 +15,18 @@ const NextRestartButton = memo(function NextRestartButton({ ...props }: NextRest
       <Tooltip delayDuration={400}>
         <TooltipTrigger asChild>
           {props.areSequencesOver() ? (
-            <Button onClick={props.resetSequences}>
-              <RotateCcw />
+            <Button onClick={props.resetSequences} className={'size-20'}>
+              <RotateCcw className={'size-10'} />
             </Button>
           ) : (
-            <Button onClick={props.setNextTimer}>
-              <ChevronLast />
+            <Button onClick={props.setNextTimer} className={'size-20'}>
+              <ChevronLast className={'size-10'} />
             </Button>
           )}
         </TooltipTrigger>
-        <TooltipContent>{props.areSequencesOver() ? <p>Restart</p> : <p>Next</p>}</TooltipContent>
+        <TooltipContent side={'bottom'} className={'text-lg'}>
+          {props.areSequencesOver() ? <p>Restart</p> : <p>Next</p>}
+        </TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

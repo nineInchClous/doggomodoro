@@ -15,16 +15,18 @@ const PlayPauseButton = memo(function PlayPauseButton({ ...props }: PlayPauseBut
       <Tooltip delayDuration={400}>
         <TooltipTrigger asChild>
           {props.isTimerActive ? (
-            <Button onClick={props.clearTimerInterval}>
-              <Pause strokeWidth={1.75} />
+            <Button onClick={props.clearTimerInterval} className={'size-20'}>
+              <Pause strokeWidth={1.75} className={'size-10'} />
             </Button>
           ) : (
-            <Button onClick={props.startTimerInterval}>
-              <Play />
+            <Button onClick={props.startTimerInterval} className={'size-20'}>
+              <Play className={'size-10'} />
             </Button>
           )}
         </TooltipTrigger>
-        <TooltipContent>{props.isTimerActive ? <p>Pause</p> : <p>Play</p>}</TooltipContent>
+        <TooltipContent side={'bottom'} className={'text-lg'}>
+          {props.isTimerActive ? <p>Pause</p> : <p>Play</p>}
+        </TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

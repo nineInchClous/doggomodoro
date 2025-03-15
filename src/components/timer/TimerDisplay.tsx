@@ -7,11 +7,12 @@ export default function TimerDisplay() {
   const { timeLeft } = useTimerContext();
 
   return (
-    <section>
-      <p>
+    <section className={'text-center flex flex-col gap-5 p-5'}>
+      <p className={'text-8xl'}>
         {getMinutesFromTimeNumber(timeLeft)} : {getSecondsFromTimeNumber(timeLeft)}
       </p>
-      <Progress value={getTimeLeftPercentage(timeLeft, 25 * 60)} />
+      <p className={'text-4xl'}>1 / 4</p>
+      <Progress value={getTimeLeftPercentage(timeLeft, 25 * 60)} className={'h-4'} />
     </section>
   );
 }

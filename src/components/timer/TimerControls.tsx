@@ -15,23 +15,24 @@ export default function TimerControls() {
     areSequencesOver,
   } = useTimerContext();
 
-  if (isTimerOver())
-    return (
-      <NextRestartButton
-        setNextTimer={setNextTimerSequence}
-        resetSequences={resetSequences}
-        areSequencesOver={areSequencesOver}
-      />
-    );
-
   return (
-    <section>
-      <PlayPauseButton
-        startTimerInterval={startTimerInterval}
-        clearTimerInterval={clearTimerInterval}
-        isTimerActive={isTimerActive}
-      />
-      <StopButton clearTimerInterval={clearTimerInterval} setTimeLeft={setTimeLeft} />
+    <section className={'flex gap-5 justify-center'}>
+      {isTimerOver() ? (
+        <NextRestartButton
+          setNextTimer={setNextTimerSequence}
+          resetSequences={resetSequences}
+          areSequencesOver={areSequencesOver}
+        />
+      ) : (
+        <>
+          <PlayPauseButton
+            startTimerInterval={startTimerInterval}
+            clearTimerInterval={clearTimerInterval}
+            isTimerActive={isTimerActive}
+          />
+          <StopButton clearTimerInterval={clearTimerInterval} setTimeLeft={setTimeLeft} />
+        </>
+      )}
     </section>
   );
 }

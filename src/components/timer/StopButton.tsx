@@ -18,11 +18,11 @@ const StopButton = memo(function StopButton({ ...props }: StopButtonProps) {
     <TooltipProvider>
       <Tooltip delayDuration={400}>
         <TooltipTrigger asChild>
-          <Button onClick={stopTimer}>
-            <Square />
+          <Button onClick={stopTimer} className={'size-20'}>
+            <Square className={'size-10'} />
           </Button>
         </TooltipTrigger>
-        <TooltipContent>
+        <TooltipContent side={'bottom'} className={'text-lg'}>
           <p>Stop</p>
         </TooltipContent>
       </Tooltip>
