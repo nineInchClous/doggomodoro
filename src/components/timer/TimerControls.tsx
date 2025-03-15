@@ -5,23 +5,23 @@ import NextRestartButton from '@/components/timer/NextRestartButton';
 
 export default function TimerControls() {
   const {
+    timerSessions,
     startTimerInterval,
     clearTimerInterval,
     setTimeLeft,
-    setNextTimerSequence,
-    resetSequences,
+    setNextTimerSession,
+    resetTimerSessions,
     isTimerActive,
     isTimerOver,
-    areSequencesOver,
   } = useTimerContext();
 
   return (
     <section className={'flex gap-5 justify-center'}>
       {isTimerOver() ? (
         <NextRestartButton
-          setNextTimer={setNextTimerSequence}
-          resetSequences={resetSequences}
-          areSequencesOver={areSequencesOver}
+          setNextTimer={setNextTimerSession}
+          resetSequences={resetTimerSessions}
+          areSequencesOver={() => timerSessions.areAllSessionsOver()}
         />
       ) : (
         <>

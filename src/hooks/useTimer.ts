@@ -1,14 +1,25 @@
-﻿import { useCallback, useEffect, useRef, useState } from 'react';
-import { TimerActions } from '@/types/interfaces/timerActions';
+﻿import React, { useCallback, useEffect, useRef, useState } from 'react';
+import TimerSessions from '@/entities/timerSessions';
 
-const defaultTimerSequences = [25, 5, 25, 5, 25, 5, 25, 15];
+export interface TimerHookReturnValue {
+  timerSessions: TimerSessions;
+  timeLeft: number;
+  setTimeLeft: React.Dispatch<React.SetStateAction<number>>;
+  startTimerInterval: () => void;
+  setNextTimerSession: () => void;
+  resetTimerSessions: () => void;
+  clearTimerInterval: () => void;
+  isTimerActive: boolean;
+  isTimerOver: () => boolean;
+}
 
-export const useTimer = (timerSequences: number[] = defaultTimerSequences): TimerActions => {
-  const [timeLeft, setTimeLeft] = useState(timerSequences[0]);
+const defaultTimerSessions: TimerSessions = new TimerSessions([25, 5, 25, 5, 25, 5, 25, 15]);
+
+export const useTimer = (timerSessions: TimerSessions = defaultTimerSessions): TimerHookReturnValue => {
+  const [timeLeft, setTimeLeft] = useState(timerSessions.currentSession);
   const [isTimerActive, setIsTimerActive] = useState(false);
 
   const timerIntervalId = useRef<NodeJS.Timeout | null>(null);
-  const currentSequenceIndex = useRef(0);
 
   const startTimerInterval = useCallback(() => {
     setIsTimerActive(true);
@@ -27,31 +38,27 @@ export const useTimer = (timerSequences: number[] = defaultTimerSequences): Time
     }
   }, []);
 
-  const setNextTimerSequence = useCallback(() => {
-    if (currentSequenceIndex.current === timerSequences.length - 1) return;
+  const setNextTimerSession = useCallback(() => {
+    if (timerSessions.areAllSessionsOver()) return;
 
     clearTimerInterval();
-    currentSequenceIndex.current++;
-    setTimeLeft(timerSequences[currentSequenceIndex.current]);
-  }, [clearTimerInterval, timerSequences]);
+    timerSessions.goToNextSession();
+    setTimeLeft(timerSessions.currentSession);
+  }, [clearTimerInterval, timerSessions]);
 
-  const resetSequences = useCallback(() => {
+  const resetTimerSessions = useCallback(() => {
     clearTimerInterval();
-    currentSequenceIndex.current = 0;
-    setTimeLeft(timerSequences[currentSequenceIndex.current]);
-  }, [clearTimerInterval, timerSequences]);
+    timerSessions.resetSessions();
+    setTimeLeft(timerSessions.currentSession);
+  }, [clearTimerInterval, timerSessions]);
 
   const isTimerOver = useCallback(() => timeLeft <= 0, [timeLeft]);
-  const areSequencesOver = useCallback(
-    () => currentSequenceIndex.current === timerSequences.length - 1,
-    [timerSequences.length]
-  );
 
   useEffect(() => {
-    if (timeLeft === 0) {
+    if (isTimerOver()) {
       clearTimerInterval();
     }
-  }, [clearTimerInterval, timeLeft]);
+  }, [clearTimerInterval, isTimerOver, timeLeft]);
 
   // Clear timer interval on component unmount
   useEffect(() => {
@@ -61,14 +68,14 @@ export const useTimer = (timerSequences: number[] = defaultTimerSequences): Time
   }, [clearTimerInterval]);
 
   return {
+    timerSessions,
     timeLeft,
     setTimeLeft,
     startTimerInterval,
-    setNextTimerSequence,
-    resetSequences,
+    setNextTimerSession,
+    resetTimerSessions,
     clearTimerInterval,
     isTimerActive,
     isTimerOver,
-    areSequencesOver,
   };
 };
