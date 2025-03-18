@@ -1,4 +1,4 @@
-﻿export function requestNotificationPermission(): void {
+﻿export const requestNotificationPermission = (): void => {
   if (!('Notification' in window)) {
     console.log('This browser does not support notifications.');
     return;
@@ -18,4 +18,4 @@
       }
     });
   }
-}
+};

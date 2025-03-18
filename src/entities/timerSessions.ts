@@ -19,6 +19,10 @@
     return this._sequences.length / 2;
   }
 
+  get isWorkSession() {
+    return this._currentSessionIndex % 2 === 0;
+  }
+
   goToNextSession() {
     if (this._currentSessionIndex < this._sequences.length - 1) this._currentSessionIndex++;
   }
