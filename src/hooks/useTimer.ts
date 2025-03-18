@@ -40,7 +40,7 @@ export const useTimer = (timerSessions: TimerSessions = defaultTimerSessions): T
   }, []);
 
   const setNextTimerSession = useCallback(() => {
-    if (timerSessions.areAllSessionsOver()) return;
+    if (timerSessions.areAllSessionsOver) return;
 
     clearTimerInterval();
     timerSessions.goToNextSession();

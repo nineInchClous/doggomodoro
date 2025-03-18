@@ -21,7 +21,7 @@ export default function TimerControls() {
         <NextRestartButton
           setNextTimer={setNextTimerSession}
           resetSequences={resetTimerSessions}
-          areSequencesOver={() => timerSessions.areAllSessionsOver()}
+          areSequencesOver={() => timerSessions.areAllSessionsOver}
         />
       ) : (
         <>

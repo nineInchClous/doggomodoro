@@ -23,15 +23,15 @@
     return this._currentSessionIndex % 2 === 0;
   }
 
+  get areAllSessionsOver() {
+    return this._currentSessionIndex === this._sequences.length - 1;
+  }
+
   goToNextSession() {
     if (this._currentSessionIndex < this._sequences.length - 1) this._currentSessionIndex++;
   }
 
   resetSessions() {
     this._currentSessionIndex = 0;
-  }
-
-  areAllSessionsOver() {
-    return this._currentSessionIndex === this._sequences.length - 1;
   }
 }

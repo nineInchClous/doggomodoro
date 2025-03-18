@@ -15,7 +15,7 @@ export default function TimerDisplay() {
       <p className={'text-8xl'}>
         {secondsOrMinutesToString(minutesLeft)}:{secondsOrMinutesToString(secondsLeft)}
       </p>
-      <Progress value={getTimeLeftPercentage(timeLeft, 25 * 60)} className={'h-4'} />
+      <Progress value={getTimeLeftPercentage(timeLeft, timerSessions.currentSession)} className={'h-4'} />
       <p className={'text-2xl'}>
         {timerSessions.currentSessionIndex} of {timerSessions.sessionCount} sessions
       </p>
