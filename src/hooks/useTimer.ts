@@ -8,6 +8,7 @@ export interface TimerHookReturnValue {
   setTimeLeft: React.Dispatch<React.SetStateAction<number>>;
   startTimerInterval: () => void;
   setNextTimerSession: () => void;
+  resetTimerInterval: () => void;
   resetTimerSessions: () => void;
   clearTimerInterval: () => void;
   isTimerActive: boolean;
@@ -47,6 +48,11 @@ export const useTimer = (timerSessions: TimerSessions = defaultTimerSessions): T
     setTimeLeft(timerSessions.currentSession);
   }, [clearTimerInterval, timerSessions]);
 
+  const resetTimerInterval = useCallback(() => {
+    clearTimerInterval();
+    setTimeLeft(timerSessions.currentSession);
+  }, [clearTimerInterval, timerSessions.currentSession]);
+
   const resetTimerSessions = useCallback(() => {
     clearTimerInterval();
     timerSessions.resetSessions();
@@ -77,6 +83,7 @@ export const useTimer = (timerSessions: TimerSessions = defaultTimerSessions): T
     setTimeLeft,
     startTimerInterval,
     setNextTimerSession,
+    resetTimerInterval,
     resetTimerSessions,
     clearTimerInterval,
     isTimerActive,
