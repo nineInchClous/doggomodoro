@@ -1,5 +1,6 @@
-﻿import { Home, Settings } from 'lucide-react';
+﻿import { Dog, Home, Settings } from 'lucide-react';
 
+import { Separator } from '@/components/ui/separator';
 import {
   Sidebar,
   SidebarContent,
@@ -12,7 +13,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { Separator } from '@/components/ui/separator';
+import AppSidebarHeader from '@/components/sidebar/AppSidebarHeader';
 
 const menuItems = [
   {
@@ -30,10 +31,7 @@ const menuItems = [
 export default function AppSidebar() {
   return (
     <Sidebar collapsible={'icon'}>
-      <SidebarHeader>
-        <h1 className={'text-3xl font-bold'}>Doggomodoro</h1>
-        <Separator />
-      </SidebarHeader>
+      <AppSidebarHeader />
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
@@ -53,15 +51,6 @@ export default function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
-        <Separator />
-        <p className={'italic'}>
-          Made by{' '}
-          <a href={'https://github.com/nineInchClous'} target={'_blank'}>
-            codeintheshell
-          </a>
-        </p>
-      </SidebarFooter>
     </Sidebar>
   );
 }
