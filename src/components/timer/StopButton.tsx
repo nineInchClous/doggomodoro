@@ -1,5 +1,5 @@
 ﻿import { memo } from 'react';
-import { Square } from 'lucide-react';
+import { RotateCcw } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -14,7 +14,7 @@ const StopButton = memo(function StopButton({ ...props }: StopButtonProps) {
       <Tooltip delayDuration={400}>
         <TooltipTrigger asChild>
           <Button onClick={props.resetTimerInterval} className={'size-20'}>
-            <Square className={'size-10'} />
+            <RotateCcw className={'size-10'} />
           </Button>
         </TooltipTrigger>
         <TooltipContent side={'bottom'} className={'text-lg'}>

@@ -1,4 +1,4 @@
-﻿import React, { useCallback, useEffect, useRef, useState } from 'react';
+﻿import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import TimerSessions from '@/entities/timerSessions';
 import { showPauseTimeNotification, showWorkTimeNotification } from '@/utils/notifications/notificationDisplayer';
 
@@ -12,6 +12,7 @@ export interface TimerHookReturnValue {
   resetTimerSessions: () => void;
   clearTimerInterval: () => void;
   isTimerActive: boolean;
+  areAllSessionsOver: boolean;
   isTimerOver: () => boolean;
 }
 
@@ -22,6 +23,8 @@ export const useTimer = (timerSessions: TimerSessions = defaultTimerSessions): T
   const [isTimerActive, setIsTimerActive] = useState(false);
 
   const timerIntervalId = useRef<NodeJS.Timeout | null>(null);
+
+  const areAllSessionsOver = useMemo(() => timerSessions.areAllSessionsOver, [timerSessions.areAllSessionsOver]);
 
   const startTimerInterval = useCallback(() => {
     setIsTimerActive(true);
@@ -87,6 +90,7 @@ export const useTimer = (timerSessions: TimerSessions = defaultTimerSessions): T
     resetTimerSessions,
     clearTimerInterval,
     isTimerActive,
+    areAllSessionsOver,
     isTimerOver,
   };
 };
