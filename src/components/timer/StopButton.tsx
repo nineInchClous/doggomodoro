@@ -13,8 +13,8 @@ const StopButton = memo(function StopButton({ ...props }: StopButtonProps) {
     <TooltipProvider>
       <Tooltip delayDuration={400}>
         <TooltipTrigger asChild>
-          <Button onClick={props.resetTimerInterval} className={'size-20'}>
-            <RotateCcw className={'size-10'} />
+          <Button onClick={props.resetTimerInterval} className={'size-12'}>
+            <RotateCcw className={'size-6'} />
           </Button>
         </TooltipTrigger>
         <TooltipContent side={'bottom'} className={'text-lg'}>

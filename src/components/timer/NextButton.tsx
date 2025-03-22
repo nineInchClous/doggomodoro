@@ -20,8 +20,8 @@ const NextButton = memo(function NextRestartButton({ ...props }: NextButtonProps
     <TooltipProvider>
       <Tooltip delayDuration={400}>
         <TooltipTrigger asChild>
-          <Button onClick={handleButtonClick} className={'size-20'}>
-            <ChevronLast className={'size-10'} />
+          <Button onClick={handleButtonClick} className={'size-12'}>
+            <ChevronLast className={'size-6'} />
           </Button>
         </TooltipTrigger>
         <TooltipContent side={'bottom'} className={'text-lg'}>

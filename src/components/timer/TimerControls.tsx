@@ -15,7 +15,7 @@ export default function TimerControls() {
   } = useTimerContext();
 
   return (
-    <section className={'flex gap-5 justify-center'}>
+    <section className={'flex items-center gap-5 justify-center'}>
       <StopButton resetTimerInterval={resetTimerInterval} />
       <PlayPauseButton
         startTimerInterval={startTimerInterval}
