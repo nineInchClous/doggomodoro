@@ -1,4 +1,5 @@
-﻿import { Dog, Home, Settings } from 'lucide-react';
+﻿import Link from 'next/link';
+import { Dog, Home, Settings } from 'lucide-react';
 
 import { Separator } from '@/components/ui/separator';
 import {
@@ -18,12 +19,12 @@ import AppSidebarHeader from '@/components/sidebar/AppSidebarHeader';
 const menuItems = [
   {
     title: 'Home',
-    url: '#',
+    url: '/',
     icon: Home,
   },
   {
     title: 'Settings',
-    url: '#',
+    url: '/settings',
     icon: Settings,
   },
 ];
@@ -40,10 +41,10 @@ export default function AppSidebar() {
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

@@ -5,7 +5,7 @@ import { SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '
 
 const headerItem = {
   title: 'Doggomodoro',
-  url: '#',
+  url: '/',
   icon: Dog,
 };
 
