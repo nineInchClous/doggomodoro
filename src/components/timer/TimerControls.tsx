@@ -4,15 +4,8 @@ import StopButton from '@/components/timer/StopButton';
 import { useTimerContext } from '@/components/timer/TimerContext';
 
 export default function TimerControls() {
-  const {
-    startTimerInterval,
-    clearTimerInterval,
-    setNextTimerSession,
-    resetTimerInterval,
-    resetTimerSessions,
-    isTimerActive,
-    areAllSessionsOver,
-  } = useTimerContext();
+  const { startTimerInterval, clearTimerInterval, setNextTimerSession, resetTimerInterval, isTimerActive } =
+    useTimerContext();
 
   return (
     <section className={'flex items-center gap-5 justify-center'}>
@@ -22,11 +15,7 @@ export default function TimerControls() {
         clearTimerInterval={clearTimerInterval}
         isTimerActive={isTimerActive}
       />
-      <NextButton
-        setNextTimer={setNextTimerSession}
-        resetSequences={resetTimerSessions}
-        areAllSessionsOver={areAllSessionsOver}
-      />
+      <NextButton setNextTimer={setNextTimerSession} />
     </section>
   );
 }

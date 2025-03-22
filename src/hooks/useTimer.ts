@@ -9,11 +9,8 @@ export interface TimerHookReturnValue {
   startTimerInterval: () => void;
   setNextTimerSession: () => void;
   resetTimerInterval: () => void;
-  resetTimerSessions: () => void;
   clearTimerInterval: () => void;
   isTimerActive: boolean;
-  areAllSessionsOver: boolean;
-  isTimerOver: () => boolean;
 }
 
 const defaultTimerSessions: TimerSessions = new TimerSessions([25, 5, 25, 5, 25, 5, 25, 15]);
@@ -24,15 +21,7 @@ export const useTimer = (timerSessions: TimerSessions = defaultTimerSessions): T
 
   const timerIntervalId = useRef<NodeJS.Timeout | null>(null);
 
-  const areAllSessionsOver = useMemo(() => timerSessions.areAllSessionsOver, [timerSessions.areAllSessionsOver]);
-
-  const startTimerInterval = useCallback(() => {
-    setIsTimerActive(true);
-
-    timerIntervalId.current = setInterval(() => {
-      setTimeLeft((previousTimeLeft) => previousTimeLeft - 1);
-    }, 10);
-  }, []);
+  const isTimerOver = useMemo(() => timeLeft <= 0, [timeLeft]);
 
   const clearTimerInterval = useCallback(() => {
     setIsTimerActive(false);
@@ -44,34 +33,39 @@ export const useTimer = (timerSessions: TimerSessions = defaultTimerSessions): T
   }, []);
 
   const setNextTimerSession = useCallback(() => {
-    if (timerSessions.areAllSessionsOver) return;
-
     clearTimerInterval();
-    timerSessions.goToNextSession();
+
+    if (timerSessions.areAllSessionsOver) {
+      timerSessions.resetSessions();
+    } else {
+      timerSessions.goToNextSession();
+    }
+
     setTimeLeft(timerSessions.currentSession);
   }, [clearTimerInterval, timerSessions]);
+
+  const startTimerInterval = useCallback(() => {
+    if (isTimerOver) setNextTimerSession();
+    setIsTimerActive(true);
+
+    timerIntervalId.current = setInterval(() => {
+      setTimeLeft((previousTimeLeft) => previousTimeLeft - 1);
+    }, 10);
+  }, [isTimerOver, setNextTimerSession]);
 
   const resetTimerInterval = useCallback(() => {
     clearTimerInterval();
     setTimeLeft(timerSessions.currentSession);
   }, [clearTimerInterval, timerSessions.currentSession]);
 
-  const resetTimerSessions = useCallback(() => {
-    clearTimerInterval();
-    timerSessions.resetSessions();
-    setTimeLeft(timerSessions.currentSession);
-  }, [clearTimerInterval, timerSessions]);
-
-  const isTimerOver = useCallback(() => timeLeft <= 0, [timeLeft]);
-
   useEffect(() => {
-    if (isTimerOver()) {
+    if (isTimerOver) {
       clearTimerInterval();
 
       if (timerSessions.isWorkSession) showPauseTimeNotification();
       else showWorkTimeNotification();
     }
-  }, [clearTimerInterval, isTimerOver, timeLeft]);
+  }, [clearTimerInterval, isTimerOver, timeLeft, timerSessions.isWorkSession]);
 
   // Clear timer interval on component unmount
   useEffect(() => {
@@ -87,10 +81,7 @@ export const useTimer = (timerSessions: TimerSessions = defaultTimerSessions): T
     startTimerInterval,
     setNextTimerSession,
     resetTimerInterval,
-    resetTimerSessions,
     clearTimerInterval,
     isTimerActive,
-    areAllSessionsOver,
-    isTimerOver,
   };
 };
