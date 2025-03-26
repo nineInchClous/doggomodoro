@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Doggomodoro',
-  description: 'A pomodoro timer where you can pet the dog',
+  description: 'A Pomodoro timer that lets you pet the dog',
 };
 
 export default function RootLayout({
