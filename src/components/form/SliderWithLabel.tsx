@@ -30,7 +30,6 @@ export default function SliderWithLabel({ ...props }: SliderWithLabelProps) {
             max={props.maxValue}
             step={props.step ?? 1}
           />
-
           <div className="mt-1 flex items-center justify-between text-muted-foreground text-xs">
             <span>
               {props.minValue} {props.unit}

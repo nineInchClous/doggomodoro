@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { Button } from '@/components/ui/button';
 import { Form, FormField } from '@/components/ui/form';
 import SliderWithLabel from '@/components/form/SliderWithLabel';
 
@@ -19,6 +20,7 @@ const settingsFormSchema = z.object({
     .number({
       required_error: 'Work duration is required',
       invalid_type_error: 'Work duration must be a number',
+      coerce: true,
     })
     .int()
     .gte(workDurationMinValue, { message: 'Working less than 5 minutes will not be useful' })
@@ -27,6 +29,7 @@ const settingsFormSchema = z.object({
     .number({
       required_error: 'Short break duration is required',
       invalid_type_error: 'Short break duration must be a number',
+      coerce: true,
     })
     .int()
     .gte(shortBreakDurationMinValue, { message: 'Your short break should be at least 1 minute long' })
@@ -35,6 +38,7 @@ const settingsFormSchema = z.object({
     .number({
       required_error: 'Long break duration is required',
       invalid_type_error: 'Long break duration must be a number',
+      coerce: true,
     })
     .int()
     .gte(longBreakDurationMinValue, { message: 'Your long break should be at least 5 minutes long' })
@@ -76,10 +80,10 @@ export default function SettingsForm() {
           name="shortBreakDuration"
           render={({ field }) => (
             <SliderWithLabel
-              label={'Short break duration'}
+              label="Short break duration"
               minValue={shortBreakDurationMinValue}
               maxValue={shortBreakDurationMaxValue}
-              unit={'min'}
+              unit="min"
               field={field}
             />
           )}
@@ -89,14 +93,15 @@ export default function SettingsForm() {
           name="longBreakDuration"
           render={({ field }) => (
             <SliderWithLabel
-              label={'Long break duration'}
+              label="Long break duration"
               minValue={longBreakDurationMinValue}
               maxValue={longBreakDurationMaxValue}
-              unit={'min'}
+              unit="min"
               field={field}
             />
           )}
         ></FormField>
+        <Button type="submit">Save</Button>
       </form>
     </Form>
   );
