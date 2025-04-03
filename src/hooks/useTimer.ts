@@ -1,6 +1,6 @@
 ﻿import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import TimerSessions from '@/entities/timerSessions';
-import { showPauseTimeNotification, showWorkTimeNotification } from '@/utils/notifications/notificationDisplayer';
+import { showBreakTimeNotification, showWorkTimeNotification } from '@/utils/notifications/notificationDisplayer';
 
 export interface TimerHookReturnValue {
   timerSessions: TimerSessions;
@@ -62,7 +62,7 @@ export const useTimer = (timerSessions: TimerSessions = defaultTimerSessions): T
     if (isTimerOver) {
       clearTimerInterval();
 
-      if (timerSessions.isWorkSession) showPauseTimeNotification();
+      if (timerSessions.isWorkSession) showBreakTimeNotification();
       else showWorkTimeNotification();
     }
   }, [clearTimerInterval, isTimerOver, timeLeft, timerSessions.isWorkSession]);

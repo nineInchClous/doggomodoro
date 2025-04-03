@@ -4,7 +4,7 @@
   showNotification(title, options);
 };
 
-export const showPauseTimeNotification = (): void => {
+export const showBreakTimeNotification = (): void => {
   const title = "It's time to take a break! 🐶";
   const options: NotificationOptions = { body: getRandomBody(pauseTimeBodies) };
   showNotification(title, options);
