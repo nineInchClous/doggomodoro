@@ -3,7 +3,7 @@
 import { FormControl, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Slider } from '@/components/ui/slider';
 
-interface SliderWithLabelProps {
+interface SliderInputProps {
   label: string;
   minValue: number;
   maxValue: number;
@@ -12,7 +12,7 @@ interface SliderWithLabelProps {
   unit?: string;
 }
 
-export default function SliderWithLabel({ ...props }: SliderWithLabelProps) {
+export default function SliderInput({ ...props }: SliderInputProps) {
   return (
     <FormItem>
       <FormLabel className="text-base">

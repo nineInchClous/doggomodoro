@@ -12,8 +12,8 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { Switch } from '@/components/ui/switch';
-import SliderWithLabel from '@/components/form/SliderWithLabel';
-import SwitchWithLabel from '@/components/form/SwitchWithLabel';
+import SliderInput from '@/components/form/SliderInput';
+import SwitchInput from '@/components/form/SwitchInput';
 
 export default function SettingsForm() {
   const form = useForm<z.infer<typeof settingsFormSchema>>({
@@ -32,7 +32,7 @@ export default function SettingsForm() {
           control={form.control}
           name="workDuration"
           render={({ field }) => (
-            <SliderWithLabel
+            <SliderInput
               label={'Work duration'}
               minValue={settingsMinMaxValues.workDurationMinValue}
               maxValue={settingsMinMaxValues.workDurationMaxValue}
@@ -46,7 +46,7 @@ export default function SettingsForm() {
           control={form.control}
           name="shortBreakDuration"
           render={({ field }) => (
-            <SliderWithLabel
+            <SliderInput
               label="Short break duration"
               minValue={settingsMinMaxValues.shortBreakDurationMinValue}
               maxValue={settingsMinMaxValues.shortBreakDurationMaxValue}
@@ -60,7 +60,7 @@ export default function SettingsForm() {
           control={form.control}
           name="longBreakDuration"
           render={({ field }) => (
-            <SliderWithLabel
+            <SliderInput
               label="Long break duration"
               minValue={settingsMinMaxValues.longBreakDurationMinValue}
               maxValue={settingsMinMaxValues.longBreakDurationMaxValue}
@@ -74,7 +74,7 @@ export default function SettingsForm() {
           control={form.control}
           name="roundsCount"
           render={({ field }) => (
-            <SliderWithLabel
+            <SliderInput
               label="Rounds"
               minValue={settingsMinMaxValues.roundsCountMinValue}
               maxValue={settingsMinMaxValues.roundsCountMaxValue}
@@ -87,7 +87,7 @@ export default function SettingsForm() {
           control={form.control}
           name="autoStart"
           render={({ field }) => (
-            <SwitchWithLabel
+            <SwitchInput
               label="Auto start"
               description="Automatically start the next round when the previous one ends"
               field={field}
