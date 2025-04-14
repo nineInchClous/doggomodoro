@@ -7,6 +7,7 @@ import {
 } from '@/entities/forms/settingsFormSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
@@ -23,6 +24,7 @@ export default function SettingsForm() {
 
   function onSubmit(values: z.infer<typeof settingsFormSchema>) {
     console.log(values);
+    toast.success('Settings saved');
   }
 
   return (

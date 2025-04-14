@@ -5,6 +5,7 @@ import '@/styles/globals.css';
 import '@/styles/base.css';
 
 import React from 'react';
+import { Toaster } from 'sonner';
 
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import AppSidebar from '@/components/sidebar/AppSidebar';
@@ -37,6 +38,7 @@ export default function RootLayout({
           <SidebarTrigger />
 
           <main className={'px-4 py-8'}>{children}</main>
+          <Toaster closeButton richColors />
         </SidebarProvider>
       </body>
     </html>
