@@ -10,8 +10,10 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
-import { Form, FormField } from '@/components/ui/form';
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from '@/components/ui/form';
+import { Switch } from '@/components/ui/switch';
 import SliderWithLabel from '@/components/form/SliderWithLabel';
+import SwitchWithLabel from '@/components/form/SwitchWithLabel';
 
 export default function SettingsForm() {
   const form = useForm<z.infer<typeof settingsFormSchema>>({
@@ -76,6 +78,18 @@ export default function SettingsForm() {
               label="Rounds"
               minValue={settingsMinMaxValues.roundsCountMinValue}
               maxValue={settingsMinMaxValues.roundsCountMaxValue}
+              field={field}
+            />
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="autoStart"
+          render={({ field }) => (
+            <SwitchWithLabel
+              label="Auto start"
+              description="Automatically start the next round when the previous one ends"
               field={field}
             />
           )}

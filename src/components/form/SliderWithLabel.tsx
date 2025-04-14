@@ -15,7 +15,7 @@ interface SliderWithLabelProps {
 export default function SliderWithLabel({ ...props }: SliderWithLabelProps) {
   return (
     <FormItem>
-      <FormLabel>
+      <FormLabel className="text-base">
         {props.label}: {props.field.value} {props.unit}
       </FormLabel>
       <FormControl>

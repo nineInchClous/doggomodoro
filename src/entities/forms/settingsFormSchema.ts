@@ -68,7 +68,7 @@ const settingsFormSchema = z.object({
     .lte(settingsMinMaxValues.roundsCountMaxValue, {
       message: "Don't push yourself too hard, 10 rounds is plenty",
     }),
-  autoStart: z.boolean({ coerce: true }),
+  autoStart: z.boolean().default(false),
 });
 
 export { settingsMinMaxValues, settingsFormDefaultValues, settingsFormSchema };
