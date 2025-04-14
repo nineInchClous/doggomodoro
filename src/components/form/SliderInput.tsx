@@ -19,7 +19,7 @@ export default function SliderInput({ ...props }: SliderInputProps) {
         {props.label}: {props.field.value} {props.unit}
       </FormLabel>
       <FormControl>
-        <div className="w-full max-w-xl">
+        <div>
           <Slider
             {...props.field}
             value={[props.field.value]}
