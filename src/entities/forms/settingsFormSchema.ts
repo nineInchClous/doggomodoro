@@ -17,6 +17,7 @@ const settingsFormDefaultValues = {
   longBreakDuration: 15,
   roundsCount: 4,
   autoStart: false,
+  notifications: true,
 };
 
 const settingsFormSchema = z.object({
@@ -69,6 +70,7 @@ const settingsFormSchema = z.object({
       message: "Don't push yourself too hard, 10 rounds is plenty",
     }),
   autoStart: z.boolean().default(false),
+  notifications: z.boolean().default(true),
 });
 
 export { settingsMinMaxValues, settingsFormDefaultValues, settingsFormSchema };

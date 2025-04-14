@@ -95,6 +95,18 @@ export default function SettingsForm() {
           )}
         />
 
+        <FormField
+          control={form.control}
+          name="notifications"
+          render={({ field }) => (
+            <SwitchInput
+              label="Notifications"
+              description="Display a notification at the start or end of a round"
+              field={field}
+            />
+          )}
+        />
+
         <Button type="submit">Save</Button>
       </form>
     </Form>
