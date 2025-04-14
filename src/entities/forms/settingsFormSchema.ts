@@ -1,4 +1,4 @@
-﻿import { z } from 'zod';
+﻿import { coerce, z } from 'zod';
 
 const settingsMinMaxValues = {
   workDurationMinValue: 5,
@@ -7,12 +7,16 @@ const settingsMinMaxValues = {
   shortBreakDurationMaxValue: 30,
   longBreakDurationMinValue: 5,
   longBreakDurationMaxValue: 60,
+  roundsCountMinValue: 2,
+  roundsCountMaxValue: 10,
 };
 
 const settingsFormDefaultValues = {
   workDuration: 25,
   shortBreakDuration: 5,
   longBreakDuration: 15,
+  roundsCount: 4,
+  autoStart: false,
 };
 
 const settingsFormSchema = z.object({
@@ -51,6 +55,20 @@ const settingsFormSchema = z.object({
     .lte(settingsMinMaxValues.longBreakDurationMaxValue, {
       message: 'A long break of 60 minutes should be well enough to rest',
     }),
+  roundsCount: z
+    .number({
+      required_error: 'Rounds count is required',
+      invalid_type_error: 'Rounds count must be a number',
+      coerce: true,
+    })
+    .int()
+    .gte(settingsMinMaxValues.roundsCountMinValue, {
+      message: 'You should complete at least 2 rounds to progress your project',
+    })
+    .lte(settingsMinMaxValues.roundsCountMaxValue, {
+      message: "Don't push yourself too hard, 10 rounds is plenty",
+    }),
+  autoStart: z.boolean({ coerce: true }),
 });
 
 export { settingsMinMaxValues, settingsFormDefaultValues, settingsFormSchema };

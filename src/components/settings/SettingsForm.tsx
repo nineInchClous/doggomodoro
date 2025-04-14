@@ -38,7 +38,8 @@ export default function SettingsForm() {
               field={field}
             />
           )}
-        ></FormField>
+        />
+
         <FormField
           control={form.control}
           name="shortBreakDuration"
@@ -51,7 +52,8 @@ export default function SettingsForm() {
               field={field}
             />
           )}
-        ></FormField>
+        />
+
         <FormField
           control={form.control}
           name="longBreakDuration"
@@ -64,7 +66,21 @@ export default function SettingsForm() {
               field={field}
             />
           )}
-        ></FormField>
+        />
+
+        <FormField
+          control={form.control}
+          name="roundsCount"
+          render={({ field }) => (
+            <SliderWithLabel
+              label="Rounds"
+              minValue={settingsMinMaxValues.roundsCountMinValue}
+              maxValue={settingsMinMaxValues.roundsCountMaxValue}
+              field={field}
+            />
+          )}
+        />
+
         <Button type="submit">Save</Button>
       </form>
     </Form>
